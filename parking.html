@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parking System</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .section {
+            border: 2px solid black;
+            padding: 20px;
+            width: 300px;
+        }
+
+        .direction {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid gray;
+            cursor: pointer;
+            background-color: lightgray;
+        }
+
+        .slots {
+            display: grid;
+            grid-template-columns: repeat(5, 40px);
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .slot {
+            width: 40px;
+            height: 40px;
+        }
+
+        .free {
+            background-color: green;
+        }
+
+        .occupied {
+            background-color: red;
+        }
+
+        .result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Parking System</h1>
+
+<div class="container">
+
+    <!-- Two Wheeler -->
+    <div class="section">
+        <h2>Two Wheeler</h2>
+
+        <div class="direction" onclick="showFree('two')">Right</div>
+
+        <div class="slots" id="twoSlots">
+            <div class="slot free"></div>
+            <div class="slot occupied"></div>
+            <div class="slot free"></div>
+            <div class="slot occupied"></div>
+            <div class="slot free"></div>
+        </div>
+
+        <div class="result" id="twoResult"></div>
+    </div>
+
+    <!-- Four Wheeler -->
+    <div class="section">
+        <h2>Four Wheeler</h2>
+
+        <div class="direction" onclick="showFree('four')">Right</div>
+
+        <div class="slots" id="fourSlots">
+            <div class="slot occupied"></div>
+            <div class="slot free"></div>
+            <div class="slot occupied"></div>
+            <div class="slot free"></div>
+            <div class="slot free"></div>
+        </div>
+
+        <div class="result" id="fourResult"></div>
+    </div>
+
+</div>
+
+<script>
+function showFree(type) {
+    let slots, result;
+
+    if(type === 'two') {
+        slots = document.querySelectorAll("#twoSlots .slot");
+        result = document.getElementById("twoResult");
+    } else {
+        slots = document.querySelectorAll("#fourSlots .slot");
+        result = document.getElementById("fourResult");
+    }
+
+    let freeCount = 0;
+
+    slots.forEach(slot => {
+        if(slot.classList.contains("free")) {
+            freeCount++;
+        }
+    });
+
+    result.innerText = "Free Slots: " + freeCount;
+}
+</script>
+
+</body>
+</html>
